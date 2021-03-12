@@ -1,0 +1,30 @@
+html {
+    height: 100%;
+ }
+ body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: sienna;
+ }
+
+header {
+    width: 100%;
+    background-color: chocolate;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    width: 100%;
+    background-color: white;
+    margin: 1%;
+
+}
+
+#root {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    margin-top: 0px;
+  } 

@@ -1,0 +1,14 @@
+{{define "body"}}
+    <p>admin</p>
+    <form action="/admin" method="POST">
+        <div class="form-group">
+          <label for="login">user</label>
+          <input type="text" class="form-control" placeholder="Enter login" id="login">
+        </div>
+        <div class="form-group">
+          <label for="pwd">pwd</label>
+          <input type="password" class="form-control" placeholder="Enter password" id="pwd">
+        </div>       
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+{{end}}

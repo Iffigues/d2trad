@@ -1,0 +1,72 @@
+version: '3.7'
+networks:
+  back-tier:
+    driver: bridge
+volumes:
+  api:
+  database_postgres: 
+volumes:
+  database-data:
+services:
+    polaroid:
+      image: golang
+      restart: always
+      volumes:
+        - "./polaroid:/go/src/app"
+      working_dir: /go/src/app
+      command: "go run ."
+      expose:
+        - "80"
+      ports:
+        - 80:80
+      links:
+        - psql
+      networks:
+        - back-tier
+      depends_on:
+       - psql
+    staticserver:
+        image: golang
+        restart: always
+        volumes:
+            - "./staticserver:/go/src/app"
+        working_dir: /go/src/app
+        command: "sh sh.sh"
+        expose:
+          - "3006"
+        ports:
+          - 3006:3006
+        networks:
+          - back-tier
+    psql:
+        image: "postgres"
+        restart: always
+        env_file:
+          - database.env
+        restart: always
+        networks:
+          - back-tier
+        expose: 
+          - 5432
+        ports:
+          - "5432:5432"
+        volumes:
+          - database-data:/var/lib/postgresql/data/
+    smtp:
+      image: namshi/smtp
+      networks:
+        - back-tier
+    ddos:
+      image: sflow/ddos-blackhole
+      networks:
+        - back-tier
+      expose:
+        - "8008"
+        - "6343"
+      ports:
+        - "8008:8008"
+        - "6343:6343/udp"
+      volumes:
+        - "./ddos.conf:/sflow-rt/ddos.conf"
+        - "sflow/ddos-blackhole"
+        - "Dsystem.propertyFiles=ddos.conf"
