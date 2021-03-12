@@ -46,7 +46,7 @@ func (s *Server) StartHH() {
 func NewServer(conf config.Config) *Server {
 	router := mux.NewRouter()
 	router.StrictSlash(true)
-	router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
+	//router.PathPrefix("/public/").Handler(http.StripPrefix("/public/", http.FileServer(http.Dir("./public/"))))
 	return &Server{
 		Data: &types.Data{
 			Store: sessions.NewCookieStore([]byte(os.Getenv("SESSION_KEY"))),
