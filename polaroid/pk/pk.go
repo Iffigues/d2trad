@@ -52,38 +52,13 @@ func (a *Pk) Starter() {
 
 	defer db.Close()
 
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS article (
-		title VARCHAR(50) UNIQUE,
-		describe VARCHAR(50), 
-		logo VARCHAR(50),
-		body VARCHAR(50), 
-		css VARCHAR(50),
-		name VARCHAR(50) UNIQUE
-	);`)
+	_, err = db.Exec(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS gallerie (
-		title VARCHAR(50) UNIQUE,
-		describe VARCHAR(50),
-		logo VARCHAR(50),
-		body VARCHAR(50),
-		css VARCHAR(50),
-		name VARCHAR(50) UNIQUE
-	);`)
-
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS connect (
-		token VARCHAR(128)
-	);`)
-
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS users (
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS userss (
+		id SERIAL PRIMARY KEY,
 		login VARCHAR(50),
-		logo VARCHAR(50),
 		password VARCHAR(50),
 		mail VARCHAR(50)
 	);`)

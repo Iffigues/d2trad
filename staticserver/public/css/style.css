@@ -10,6 +10,10 @@ html {
 
 header {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
     background-color: chocolate;
     margin: 0;
     padding: 0;
@@ -20,6 +24,10 @@ footer {
     background-color: white;
     margin: 1%;
 
+}
+
+.he {
+	flex: none;
 }
 
 #root {

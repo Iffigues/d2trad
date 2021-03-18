@@ -43,7 +43,7 @@ func NewHeader(r *http.Request, w http.ResponseWriter, title string, d *types.Da
 		R: r,
 		W: w,
 		Data: &Good{
-			Title: title,
+			Title: "gopiko-"+title,
 			CSS:   nil,
 			JS:    nil,
 			Isco:  false,

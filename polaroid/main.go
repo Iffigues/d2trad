@@ -12,6 +12,8 @@ import (
 func main() {
 	conf := config.NewConf()
 	conf["pk"] = config.Pk()
+	//l := NewPk(conf)
+	//db := l.Connect();
 	srv := server.NewServer(conf)
 	adm := admin.NewAdmin(srv.Data)
 	srv.AddHH(adm)
