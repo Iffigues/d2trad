@@ -13,7 +13,7 @@ header {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     background-color: chocolate;
     margin: 0;
     padding: 0;
@@ -22,12 +22,30 @@ header {
 footer {
     width: 100%;
     background-color: white;
-    margin: 1%;
-
+    
 }
 
 .he {
+	display: flex;
+	flex-direction: row;;
 	flex: none;
+}
+
+
+.signup {
+	display: flex;
+	flex-direction: column;
+}
+.ha {
+	flex-wrap: wrap;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#malin {
+	display: flex;
+	justify-content: center;
 }
 
 #root {
@@ -35,4 +53,5 @@ footer {
     margin: 0;
     padding: 0;
     margin-top: 0px;
-  } 
+  }
+

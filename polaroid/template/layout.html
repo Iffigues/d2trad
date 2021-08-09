@@ -31,15 +31,29 @@
   </head>
   <body>
 	<header>
-		<a  class="he">Link 1</a>
-      		<a  class="he">Link 2</a>
-      		<a  class="he">Link 3</a>
-		<a href="/signup" class="he">Sign Up</a>
-      		<a class="he">Login</a>
+		<div class="he">
+			<a  class="">Link 1</a>
+      			<a  class="">Link 2</a>
+      			<a  class="">Link 3</a>
+		</div>
+		{{ if eq .Role 1 }}
+			<div class="he">
+				<a href="/signup" class="he">Sign Up</a>
+      				<a class="he" href="/signin">Sign In</a>
+			</div>
+		{{else}}
+			<div class="he">
+				<a href="/account" class="">account</a>
+				<a class="" href="/signout">Sign Out</a>
+			</div>
+		{{end}}
 	</header>
 	<div id="root" class="d-flex flex-column">
 		{{template "body" .}}
 	</div>
+	<footer>
+		<p>alola</p>
+	</footer>
   </body>
 </html>
 {{end}}

@@ -38,6 +38,8 @@ func (a *Data) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 						return
 					}
 				}
+				w.WriteHeader(404)
+				w.Write([]byte("not found"))
 				return
 			}
 		}

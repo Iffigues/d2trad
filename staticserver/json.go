@@ -22,7 +22,6 @@ func grap(r *http.Request, ou interface{}) (err error) {
 
 func sendJson(ar interface{}, w http.ResponseWriter) (err error) {
 	w.Header().Set("Content-Type", "application/json;")
-	w.WriteHeader(http.StatusCreated)
 	err = json.NewEncoder(w).Encode(ar)
 	writeError(err)
 	return

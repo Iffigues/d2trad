@@ -43,7 +43,6 @@ func (a *Pk) IsUsers() (ok bool) {
 }
 
 func (a *Pk) Starter() {
-
 	db, err := a.Connect()
 
 	if err != nil {
@@ -51,33 +50,24 @@ func (a *Pk) Starter() {
 	}
 
 	defer db.Close()
-
-	_, err = db.Exec(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`)
-	if err != nil {
-		log.Fatal(err)
-	}
-	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS userss (
-		id SERIAL PRIMARY KEY,
-		login VARCHAR(50),
-		password VARCHAR(50),
-		mail VARCHAR(50)
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS users (
+		id SERIAL primary key,
+		login VARCHAR(50) UNIQUE NOT NULL,
+		password VARCHAR(50) UNIQUE NOT NULL,
+		mail VARCHAR(50) UNIQUE NOT NULL
 	);`)
-
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	_, err = db.Exec(`INSERT INTO users  VALUES ('iffigues','','Petassia01', 'iffigues@vivaldi.net');`)
-
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS option (
+		id SERIAL,
+		user_id INT references users 
+	);`)
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	_, err = db.Exec(`INSERT INTO users VALUES ('css', 'Mince1234', 'iffigues@vivaldi.net');`);
-
-	if err != nil {
-		log.Fatal(err)
-	}
+	db.Exec(`INSERT INTO users(login, password, mail)  VALUES ('iffigues','Petassia01', 'iffigues@vivaldi.net');`)
+	db.Exec(`INSERT INTO users (login , password, mail)VALUES ('css', 'Mince1234', 'iffigues@vivaldi.net');`);
 }
 
 func (a *Pk) Connect() (db *sql.DB, err error) {

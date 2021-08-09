@@ -15,6 +15,7 @@ type Good struct {
 	Meta    []string
 	Isco    bool
 	Role    int
+	Error	string
 	Data    interface{}
 }
 
@@ -24,8 +25,12 @@ type Header struct {
 	Data *Good
 }
 
+func (h *Header) Error(a string) {
+	h.Data.Error = a
+}
+
 func MyRole(s *types.Data, r *http.Request) (role int) {
-	session, err := s.Store.Get(r, "session-name")
+	session, err := s.Store.Get(r, "user")
 	if err != nil {
 		role = 1
 	} else {
@@ -78,4 +83,5 @@ func (h *Header) Jointure(ar ...string) {
 		return
 	}
 	tmpl.ExecuteTemplate(h.W, "layout", h.Data)
+	h.Data.Error = "";
 }

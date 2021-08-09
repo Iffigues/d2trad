@@ -23,8 +23,9 @@ func methode(a ...string) (b []string) {
 }
 
 func myRole(s *Server, r *http.Request) (role int) {
-	session, err := s.Data.Store.Get(r, "session-name")
+	session, err := s.Data.Store.Get(r, "user")
 	if err != nil {
+		fmt.Println(err)
 		role = 1
 	} else {
 		if session.Values["role"] == nil {
@@ -33,17 +34,20 @@ func myRole(s *Server, r *http.Request) (role int) {
 			role = session.Values["role"].(int)
 		}
 	}
+
 	return
 }
 
 func (s *Server) Middleware(next http.Handler, a *Handle) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		role := myRole(s, r)
+		fmt.Println(a)
 		if a.Role <= role {
+			println("Hello", a.Role, " ",role)
 			next.ServeHTTP(w, r)
 		} else {
-			jointure(r, w, nil, "layout.html", "home.html")
-			return
+
+			http.Redirect(w, r, "/", 303)
 		}
 	})
 }

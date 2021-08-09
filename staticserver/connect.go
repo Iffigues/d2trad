@@ -25,14 +25,16 @@ func (aa *Data) Connecting(w http.ResponseWriter, r *http.Request) {
 		grap(r, &t)
 		uid := TokenGenerator(16)
 		a, b, c, d := loger.Connecings(uid, t.Username, t.Password)
-		fmt.Println(b)
+		fmt.Println(b, d)
 		if d == nil {
 			aa.Connect = NewConnect(a, b, c)
 			w.WriteHeader(202)
 			sendJson(aa.Connect.TokenString, w)
-			//w.Write([]byte("Connected"))
 			return
 		}
+		w.WriteHeader(404)
+		w.Write([]byte("error"))
+		return;
 	}
 	w.WriteHeader(404)
 	w.Write([]byte("not connected"))

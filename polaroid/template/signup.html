@@ -1,21 +1,23 @@
 {{define "body"}}
-    <form action="/signup" method="POST">
-        <div class="">
+<div id="malin">
+    <form action="/signup" class="signup"  method="POST">
+        <div class="ha">
           <label for="email">email</label>
-          <input type="email" class="" placeholder="Enter email" id="email">
+          <input type="email" class="" name="email"placeholder="Enter email" id="email">
         </div>
-        <div class="">
+        <div class="ha">
           <label for="login">login</label>
-          <input type="login" class="" placeholder="login" id="login">
+          <input type="login" name="login"class="" placeholder="login" id="login">
         </div>
-        <div class="">
+        <div class="ha">
             <label for="pwd">Password</label>
-            <input type="" class="" placeholder="Enter password" id="pwd">
+            <input type="" class="" name="pwd" placeholder="Enter password" id="pwd">
         </div>
-        <div class="">
+        <div class="ha">
 	 	<label for"pwd1">Password verif</label>	
-		<input type="password" class="" placeholder="rewrite password" id="pwd1">
+		<input type="password" class="" name="pwd1" placeholder="rewrite password" id="pwd1">
       	</div>
         <button type="submit" class="">Submit</button>
       </form>
+      </div>
 {{end}}

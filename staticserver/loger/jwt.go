@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
+	"errors"
 )
 
 type Credentials struct {
@@ -20,7 +21,8 @@ type Claims struct {
 }
 
 func Connecings(uuid, login, pwd string) (token *jwt.Token,tokenString string, expirationTime time.Time, err error) {
-	if login != "css" && pwd != "Mince1234" {
+	if login != "css" || pwd != "Mince1234" {
+		err =  errors.New("zz")
 		return
 	}
 	expirationTime = time.Now().Add(30 * time.Minute)
