@@ -26,5 +26,6 @@ func main() {
 		//r.URL
 	})
 	t.c.Visit(t.url)
-	child(t.child)
+	e := child(t.child)
+	makeme(e)
 }

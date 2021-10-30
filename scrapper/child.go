@@ -4,6 +4,20 @@ import "fmt"
 import "github.com/gocolly/colly/v2"
 import "strings"
 
+type Obj struct {
+	Url		string
+	Unique		bool
+	Standar		bool
+	Set		bool
+	Specifique	bool
+	Ring		bool
+	Amu		bool
+	Charme		bool
+	Joyeau		bool
+	Gemme		bool
+	Class		string
+}
+
 func set(a string) {
 	t := &Collector{
 		url: a,
@@ -42,26 +56,55 @@ func setClass(a string) (b bool) {
 	return false
 }
 
-func child(a []string) {
-	for _, b := range a {
-		l := strings.Split(b[31:len(b) - 1],"-")
-		e := len(l)
-		if l[0] == "set" {
-			if setClass(l[1]) {
-			} else {
-			}
-		}
-		if l[2] == "specifiques" {
-		}
-		if l[1] == "uniques" {
-			fmt.Println(l[1], l)
-		}
-		z := l[e - 1]
-		if z == "standards" {
-			fmt.Println("stand", l)
-		}
-		if z == "uniques" {
-			fmt.Println("unique", l)
+func setObj(a string) (b bool) {
+	t := []string{"anneaux", "amulettes", "charmes", "joyaux", "gemmes"}
+	for _,c := range t {
+		if a == c {
+			return true
 		}
 	}
+	return false
+}
+
+func child(a []string) (o []Obj) {
+	var obj []Obj
+	for _, b := range a {
+		var oj Obj
+		l := strings.Split(b[31:len(b) - 1],"-")
+		oj.Url = b
+		for _, val := range l {
+			if val == "set" {
+				oj.Set = true
+			}
+			if val == "specifiques" {
+				oj.Specifique = true
+			}
+			if val == "uniques" {
+				oj.Unique  = true
+			}
+			if val == "standards" {
+				oj.Standar = true
+			}
+			if val == "anneaux" {
+				oj.Ring = true
+			}
+			if val == "amulettes" {
+				oj.Amu = true
+			}
+			if val == "charmes" {
+				oj.Charme = true
+			}
+			if "joyaux" == val {
+				oj.Joyeau = true
+			}
+			if "gemmes"  == val {
+				oj.Gemme = true
+			}
+			if setClass(val) {
+				oj.Class  = val
+			}
+		}
+		obj = append(obj, oj)
+	}
+	return obj
 }
