@@ -26,6 +26,9 @@ func collectText(n *html.Node, buf *bytes.Buffer) {
     }
 }
 
+func h(e string n *html.Node) {
+}
+
 func uniques(e Obj) {
 	resp := uu(e.Url)
 	defer resp.Body.Close()
@@ -63,10 +66,12 @@ func uniques(e Obj) {
 			}
 		}
 		if n.Type == html.ElementNode && n.Data == "div" {
-			//var b bool
+			var b bool
 			for _, a := range n.Attr {
 				if a.Key == "class" && a.Val == "et_pb_text_inner" {
-					//b = true
+					b = true
+				}
+				if b {
 				}
 			}
 		}
